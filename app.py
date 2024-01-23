@@ -3,8 +3,15 @@ from regressions import *
 from plot import *
 import numpy as np
 
+test_points = 8
+test_base = 5
 
-arr = [1, 100, 1000, 10000, 100000]
+arr = []
+
+for i in range(test_points):
+    arr.append(test_base**i)
+
+print(arr)
 
 points = np.vstack((arr, normalize_array(multiple_testing(amount_of_orders, arr)))).T # most readable line of code ever :))
 

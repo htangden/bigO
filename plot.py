@@ -16,6 +16,8 @@ def plot_bigO(f, points):
     plt.style.use('dark_background')
     fig, axs = plt.subplots()
 
+    axs.set_xscale('log')
+
     s_x, b_x = find_point_bounds(points)
     x_axis = np.linspace(s_x, b_x, 500)
 
