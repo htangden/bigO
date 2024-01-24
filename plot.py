@@ -12,12 +12,9 @@ def find_point_bounds(points):
             biggest_x = x
     return [smallest_x, biggest_x]
 
-def plot_bigO(f, points):
+def plot_bigO(functions, function_names, costs, points):
     plt.style.use('dark_background')
-    fig, axs = plt.subplots()
-
-    axs.set_xscale('log')
-
+    fig, axs = plt.subplots(nrows=int(len(functions)/2), ncols=2, figsize=(10, 7))
     s_x, b_x = find_point_bounds(points)
     x_axis = np.linspace(s_x, b_x, 500)
 
@@ -27,8 +24,13 @@ def plot_bigO(f, points):
         x.append(x1)
         y.append(y1)
 
-    axs.scatter(x, y)
-    axs.plot(x_axis, f(x_axis))
+    for i, f in enumerate(functions):
+        row = int(i%(len(functions)/2))
+        col = int(i/(len(functions)/2))
+        print(row, col)
+        axs[row][col].scatter(x, y)
+        axs[row][col].plot(x_axis, f(x_axis))
+        axs[row][col].set_title(f'{function_names[i]} - {costs[i]:.2f}')
 
     plt.show()
 
