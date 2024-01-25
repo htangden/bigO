@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from functions import *
 
 
 def find_point_bounds(points):
@@ -12,7 +13,7 @@ def find_point_bounds(points):
             biggest_x = x
     return [smallest_x, biggest_x]
 
-def plot_bigO(functions, function_names, costs, points):
+def plot_bigO(functions, costs, points):
     plt.style.use('dark_background')
     fig, axs = plt.subplots(nrows=int(len(functions)/2), ncols=2, figsize=(10, 7))
     s_x, b_x = find_point_bounds(points)
@@ -27,10 +28,10 @@ def plot_bigO(functions, function_names, costs, points):
     for i, f in enumerate(functions):
         row = int(i%(len(functions)/2))
         col = int(i/(len(functions)/2))
-        print(row, col)
-        axs[row][col].scatter(x, y)
-        axs[row][col].plot(x_axis, f(x_axis))
-        axs[row][col].set_title(f'{function_names[i]} - {costs[i]:.2f}')
+        axs[row][col].scatter(x, y, color='magenta')
+        axs[row][col].plot(x_axis, f[0](x_axis), color='cyan')
+        axs[row][col].set_title(f'{f[1]} - {sci_not(costs[i])}')
 
+    fig.subplots_adjust(hspace=0.5)
     plt.show()
 
